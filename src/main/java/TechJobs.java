@@ -129,17 +129,18 @@ public class TechJobs {
 //        location: Saint Louis
 //        core competency: Statistical Analysis
 //        *****
+        // Check if there are any job listings in someJobs
         if (someJobs.isEmpty()) {
             System.out.println("No Results");
         } else {
             // Iterate through the job listings and print them
-            for (HashMap job : someJobs) {
-                    System.out.println("*****");
-                    for (Object jobInfo : job.keySet()) {
-                        System.out.println(jobInfo + ": " + job.get(jobInfo));
-                    }
-                    System.out.println("*****\n");
+            for (HashMap<String, String> job : someJobs) {
+                System.out.println("\n*****");
+                for (HashMap.Entry<String, String> entry : job.entrySet()) {
+                    System.out.println(entry.getKey() + ": " + entry.getValue());
                 }
+                System.out.println("*****");
+            }
         }
     }
 }

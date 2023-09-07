@@ -50,6 +50,7 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+
         return allJobs;
     }
 
@@ -69,13 +70,16 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+        // Convert the search term to lowercase for case-insensitive comparison
+        value = value.toLowerCase();
+
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue !=null && aValue.toLowerCase().contains(value)) {
                 jobs.add(row);
             }
         }
@@ -94,8 +98,25 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        value = value.toLowerCase();
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> row : allJobs) {
+            // Iterate through all columns of each job
+            for (String column : row.keySet()) {
+                String columnValue = row.get(column);
+
+                // Check if the column value contains the search term
+                if (columnValue != null && columnValue.toLowerCase().contains(value)) {
+                    jobs.add(row);
+                    // Break out of the inner loop once a match is found in this row
+                    break;
+                }
+            }
+        }
+
+
+        return jobs;
     }
 
     /**
